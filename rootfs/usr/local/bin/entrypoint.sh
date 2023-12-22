@@ -8,15 +8,15 @@
         -days 3650 -nodes -sha256 &> /dev/null
     fi
     
-    if [ -f "${APP_ROOT}/package.json" ]; then
+    if [ -f "${APP_ROOT}/app/package.json" ]; then
       echo "found package.json, issuing npm start"
-      cd ${APP_ROOT}
+      cd ${APP_ROOT}/app
       npm install
       set -- npm start
     else
-      if [ -f "${APP_ROOT}/main.js" ]; then
+      if [ -f "${APP_ROOT}/app/main.js" ]; then
         echo "found main.js, issuing node start"
-        set -- "node" ${APP_ROOT}/main.js
+        set -- "node" ${APP_ROOT}/app/main.js
       fi
     fi
   fi

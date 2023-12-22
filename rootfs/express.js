@@ -6,17 +6,7 @@ class Express{
 
   #server;
 
-  constructor(){
-    process.once('SIGTERM', (code) =>{
-      this.#server.close();
-      process.exit(0);
-    });
-    
-    process.once('SIGINT', (code) =>{
-      this.#server.close();
-      process.exit(0);
-    });    
-    
+  constructor(){ 
     this.express = express();
     this.express.use(express.raw());
     this.express.use(express.json());
@@ -32,6 +22,17 @@ class Express{
     }, this.express);
 
     this.#server.listen(process.env.PORT || 8443);
+    console.log(`express HTTP server started on port ${process.env.PORT || 8443}`);
+
+    process.once('SIGTERM', (code) =>{
+      this.#server.close();
+      process.exit(code);
+    });
+    
+    process.once('SIGINT', (code) =>{
+      this.#server.close();
+      process.exit(code);
+    }); 
   }
 }
 

@@ -16,13 +16,13 @@ app.start();
 ```
 
 ## Volumes
-* **/express** - Directory of your nodejs express application
+* **/express/app** - Directory of your nodejs express application
 
 ## Run
 ```shell
 docker run --name express \
   -p 8443:8443/tcp \
-  -v .../:/express \
+  -v .../app:/express/app \
   -d 11notes/express:[tag]
 ```
 

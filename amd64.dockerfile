@@ -11,6 +11,7 @@
     apk add --no-cache \
       openssl; \
     mkdir -p ${APP_ROOT}; \
+    mkdir -p ${APP_ROOT}/app; \
     mkdir -p ${APP_ROOT}/ssl; \
     cd /tmp; \
     npm install --save \
