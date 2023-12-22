@@ -12,14 +12,14 @@
       openssl; \
     mkdir -p ${APP_ROOT}; \
     mkdir -p ${APP_ROOT}/ssl; \
-    cd ${APP_ROOT}; \
+    cd /tmp; \
     npm install --save \
       express@${APP_VERSION} \
       body-parser \
       nocache; \
     mv ./node_modules /; \
-    rm -rf package*json; \
-    rm -rf .npm;
+    cd /; \
+    rm -rf /tmp;
 
   # :: update image
     RUN set -ex; \
