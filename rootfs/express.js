@@ -21,8 +21,12 @@ class Express{
       cert:fs.readFileSync(`${process.env.APP_ROOT}/ssl/default.crt`, 'utf8')
     }, this.express);
 
+    this.#server.on('error', (e) => {
+      console.error('exception on express HTTPS server', e);
+    });
+
     this.#server.listen(process.env.PORT || 8443);
-    console.log(`express HTTP server started on port ${process.env.PORT || 8443}`);
+    console.log(`express HTTPS server started on port ${process.env.PORT || 8443}`);
 
     process.once('SIGTERM', (code) =>{
       this.#server.close();
