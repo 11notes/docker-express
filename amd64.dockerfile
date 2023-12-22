@@ -18,7 +18,8 @@
       body-parser \
       nocache; \
     mv ./node_modules /; \
-    rm -rf package*json;
+    rm -rf package*json; \
+    rm -rf .npm;
 
   # :: update image
     RUN set -ex; \
