@@ -7,7 +7,7 @@ Run Express based on Alpine Linux. Small, lightweight, secure and fast 🏔️
 Use this image as a base layer to deploy or develop your nodejs application with express. Simply add your code and your package.json to `-v /src/:/express`. You can use the existing express.js class if you want, like this:
 
 ```js
-const { Express } = require('./express');
+const { Express } = require('/express');
 const app = new Express();
 app.express.get('/', (req, res, next) => {
   res.json({hello:"world!"});
