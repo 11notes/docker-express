@@ -17,7 +17,8 @@
       express@${APP_VERSION} \
       body-parser \
       nocache; \
-    rm -rf package.json;
+    mv ./node_modules /; \
+    rm -rf package*json;
 
   # :: update image
     RUN set -ex; \
@@ -32,6 +33,8 @@
     RUN set -ex; \
       usermod -d ${APP_ROOT} docker; \
       chown -R 1000:1000 \
+        /express.js \
+        /node_modules \
         ${APP_ROOT};
 
 # :: Volumes
