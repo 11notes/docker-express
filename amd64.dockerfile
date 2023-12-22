@@ -34,8 +34,6 @@
     RUN set -ex; \
       usermod -d ${APP_ROOT} docker; \
       chown -R 1000:1000 \
-        /express.js \
-        /node_modules \
         ${APP_ROOT};
 
 # :: Volumes
