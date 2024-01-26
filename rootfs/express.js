@@ -12,10 +12,10 @@ class Express{
 
   constructor(){ 
     this.express = express();
-    this.app.use(express.raw({verify:raw, limit:(process.env?.MAX_BODY_SIZE || '16MB')}));
-    this.app.use(express.json({verify:raw, limit:(process.env?.MAX_BODY_SIZE || '16MB')}));
-    this.app.use(express.urlencoded({verify:raw, extended:true, limit:(process.env?.MAX_BODY_SIZE || '16MB')}));
-    this.app.use(nocache());
+    this.express.use(express.raw({verify:raw, limit:(process.env?.MAX_BODY_SIZE || '16MB')}));
+    this.express.use(express.json({verify:raw, limit:(process.env?.MAX_BODY_SIZE || '16MB')}));
+    this.express.use(express.urlencoded({verify:raw, extended:true, limit:(process.env?.MAX_BODY_SIZE || '16MB')}));
+    this.express.use(nocache());
     this.express.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
   }
 
