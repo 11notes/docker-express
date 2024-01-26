@@ -29,12 +29,12 @@ class Express{
 
     process.once('SIGTERM', (code) =>{
       this.#server.close();
-      process.exit(code);
+      process.exit(1);
     });
     
     process.once('SIGINT', (code) =>{
       this.#server.close();
-      process.exit(code);
+      process.exit(1);
     }); 
   }
 }
