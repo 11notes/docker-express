@@ -4,7 +4,7 @@
 Run Express based on Alpine Linux. Small, lightweight, secure and fast 🏔️
 
 ## Description
-Use this image as a base layer to deploy or develop your nodejs application with express. Simply add your code and your package.json to `-v /src/:/express`. You can use the existing express.js class if you want, like this:
+Use this image as a base layer to deploy or develop your nodejs application with express. Simply add your code and your package.json to `-v .../app:/node`. You can use the existing express.js class if you want, like this:
 
 ```js
 const { Express } = require('/express');
@@ -16,14 +16,14 @@ app.start();
 ```
 
 ## Volumes
-* **/express/app** - Directory of your nodejs express application
+* **/node** - Directory of your nodejs express application (main.js or package.json)
 
 ## Run
 ```shell
 docker run --name express \
   -p 8443:8443/tcp \
-  -v .../app:/express/app \
-  -d 11notes/express:[tag]
+  -v .../app:/node \
+  -d 11notes/node:[tag]
 ```
 
 ## Defaults
@@ -32,7 +32,14 @@ docker run --name express \
 | `user` | docker | user docker |
 | `uid` | 1000 | user id 1000 |
 | `gid` | 1000 | group id 1000 |
-| `home` | /express | home directory of user docker |
+| `home` | /node | home directory of user docker |
+
+## Environment
+| Parameter | Value | Default |
+| --- | --- | --- |
+| `TZ` | [Time Zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | |
+| `DEBUG` | Show debug information | |
+| `PORT` | express server port (SSL/TLS) | 8443 |
 
 ## Parent image
 * [11notes/node:stable](https://hub.docker.com/r/11notes/node)

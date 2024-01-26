@@ -1,7 +1,15 @@
+# :: Util
+  FROM alpine as util
+
+  RUN set -ex; \
+    apk add --no-cache \
+      git; \
+    git clone https://github.com/11notes/util.git;
+
 # :: Header
 	FROM 11notes/node:stable
-  ENV APP_ROOT=/express
   ENV APP_VERSION=4.18.2
+  ENV APP_ROOT=/node
 
 # :: Run
 	USER root
@@ -10,9 +18,7 @@
   RUN set -ex; \
     apk add --no-cache \
       openssl; \
-    mkdir -p ${APP_ROOT}; \
-    mkdir -p ${APP_ROOT}/app; \
-    mkdir -p ${APP_ROOT}/ssl; \
+    mkdir -p /etc/express/ssl; \
     cd /tmp; \
     npm install --save \
       express@${APP_VERSION} \
@@ -21,6 +27,8 @@
     mv ./node_modules /; \
     cd /; \
     rm -rf /tmp;
+
+  COPY --from=util /util/linux/shell/elevenLogJSON /usr/local/bin
 
   # :: update image
     RUN set -ex; \
@@ -35,6 +43,7 @@
     RUN set -ex; \
       usermod -d ${APP_ROOT} docker; \
       chown -R 1000:1000 \
+        /etc/express \
         ${APP_ROOT};
 
 # :: Volumes
