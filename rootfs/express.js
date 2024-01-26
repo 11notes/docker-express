@@ -2,15 +2,20 @@ const express = require('express');
 const nocache = require('nocache');
 const https = require('https');
 const fs = require('fs');
+
+const raw = (req, res, buf, encoding) =>{
+  req.rawBody = buf.toString(encoding || 'utf8');
+};
+
 class Express{  
   #server;
 
   constructor(){ 
     this.express = express();
-    this.express.use(express.raw());
-    this.express.use(express.json());
-    this.express.use(express.urlencoded({extended:true}));
-    this.express.use(nocache());
+    this.app.use(express.raw({verify:raw, limit:(process.env?.MAX_BODY_SIZE || '16MB')}));
+    this.app.use(express.json({verify:raw, limit:(process.env?.MAX_BODY_SIZE || '16MB')}));
+    this.app.use(express.urlencoded({verify:raw, extended:true, limit:(process.env?.MAX_BODY_SIZE || '16MB')}));
+    this.app.use(nocache());
     this.express.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
   }
 
