@@ -10,7 +10,7 @@
     
     if [ -f "${APP_ROOT}/package.json" ]; then
       elevenLogJSON INFO "found package.json, issuing npm start"
-      cd ${APP_ROOT}/app
+      cd ${APP_ROOT}
       npm install
       set -- npm start
     else
