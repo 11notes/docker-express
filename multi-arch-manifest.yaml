@@ -1,0 +1,11 @@
+image: 11notes/node:4.18.2
+manifests:
+  - image: 11notes/node:amd64-4.18.2
+    platform:
+      architecture: amd64
+      os: linux
+  - image: 11notes/node:arm64v8-4.18.2
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8
