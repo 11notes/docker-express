@@ -33,8 +33,6 @@ class Express{
     });
 
     this.#server.listen(process.env?.PORT || 8443);
-    console.log(`express HTTPS server started on port ${process.env?.PORT || 8443}`);
-
     process.once('SIGTERM', (code) =>{
       this.#server.close();
       process.exit(1);

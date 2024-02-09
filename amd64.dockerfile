@@ -1,6 +1,7 @@
 # :: Header
 	FROM 11notes/node:stable
   ENV APP_VERSION=4.18.2
+  ENV APP_NAME="express"
   ENV APP_ROOT=/node
 
 # :: Run
