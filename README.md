@@ -6,16 +6,16 @@
 **Run an Express project in comfort and style**
 
 # SYNOPSIS
-What can I do with this? This image will provide you by default with the most secure way to run HashiCorp Vault. It’s compiled from source and comes by default with all settings applied to harden it.
+What can I do with this? This image will provide you an easy method of deploying or developing an express app. Simply place your files and your `package.json` into ` /node` and start the container.
 
 # VOLUMES
-* **/node/node** - Directory of your app
+* **/node** - Directory of your app
 
 # RUN
 ```shell
 docker run --name express \
   -p 8443:8443/tcp \
-  -v .../node:/node/node \
+  -v .../node:/node \
   -d 11notes/express:[tag]
 ```
 
