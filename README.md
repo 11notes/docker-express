@@ -73,6 +73,7 @@ app.start();
 | `TZ` | [Time Zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | |
 | `DEBUG` | Show debug information | |
 | `PORT` | express server port (SSL/TLS) | 8443 |
+| `MAX_BODY_SIZE` | maximum body size of any request (MB, GB, TB) | 16MB |
 
 # PARENT IMAGE
 * [11notes/node:stable](https://hub.docker.com/r/11notes/node)
