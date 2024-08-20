@@ -1,0 +1,11 @@
+services:
+  express:
+    image: "11notes/express:4.19.2"
+    container_name: "express"
+    environment:
+      TZ: Europe/Zurich
+    volumes:
+      - "express:/node"
+    restart: always
+volumes:
+  express:

@@ -1,6 +1,6 @@
 # :: Header
 	FROM 11notes/node:stable
-  ENV APP_VERSION=4.18.2
+  ENV APP_VERSION=4.19.2
   ENV APP_NAME="express"
   ENV APP_ROOT=/node
 
@@ -23,7 +23,7 @@
 
   # :: update image
     RUN set -ex; \
-      apk --no-cache upgrade;
+      apk --no-cache --update upgrade;
 
   # :: copy root filesystem changes and add execution rights to init scripts
     COPY --chown=1000:1000 ./rootfs /
