@@ -1,10 +1,10 @@
 image: 11notes/express:4.19.2"
 manifests:
-  - image: 11notes/express:4.19.2"
+  - image: 11notes/express:amd64-4.19.2"
     platform:
       architecture: amd64
       os: linux
-  - image: 11notes/express:4.19.2"
+  - image: 11notes/express:arm64v8-4.19.2"
     platform:
       architecture: arm64
       os: linux
