@@ -21,6 +21,8 @@ services:
       TZ: Europe/Zurich
     volumes:
       - "express:/node"
+    ports:
+      - "8443:8443/tcp"
     restart: always
 volumes:
   express:
