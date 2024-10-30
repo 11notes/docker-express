@@ -1,12 +1,12 @@
 ![Banner](https://github.com/11notes/defaults/blob/main/static/img/banner.png?raw=true)
 
 # 🏔️ Alpine - Express
-![size](https://img.shields.io/docker/image-size/11notes/express/4.19.2?color=0eb305) ![version](https://img.shields.io/docker/v/11notes/express/4.19.2?color=eb7a09) ![pulls](https://img.shields.io/docker/pulls/11notes/express?color=2b75d6) ![stars](https://img.shields.io/docker/stars/11notes/express?color=e6a50e) [<img src="https://img.shields.io/badge/github-11notes-blue?logo=github">](https://github.com/11notes)
+![size](https://img.shields.io/docker/image-size/11notes/express/4.21.1?color=0eb305) ![version](https://img.shields.io/docker/v/11notes/express/4.21.1?color=eb7a09) ![pulls](https://img.shields.io/docker/pulls/11notes/express?color=2b75d6)
 
 **Run an Express project in comfort and style**
 
 # SYNOPSIS
-What can I do with this? This image will provide you an easy method of deploying or developing an express app. Simply place your files and your `package.json` into ` /node` and start the container.
+**What can I do with this?** This image will provide you an easy method of deploying or developing an express app. Simply place your files and your `package.json` into ` /node` and start the container.
 
 # VOLUMES
 * **/node** - Directory of your app
@@ -15,7 +15,7 @@ What can I do with this? This image will provide you an easy method of deploying
 ```yaml
 services:
   express:
-    image: "11notes/express:4.19.2"
+    image: "11notes/express:4.21.1"
     container_name: "express"
     environment:
       TZ: Europe/Zurich
@@ -74,6 +74,9 @@ app.start();
 | `DEBUG` | Show debug information | |
 | `PORT` | express server port (SSL/TLS) | 8443 |
 | `MAX_BODY_SIZE` | maximum body size of any request (MB, GB, TB) | 16MB |
+
+# SOURCE
+* [11notes/express:4.21.1](https://github.com/11notes/docker-express/tree/4.21.1)
 
 # PARENT IMAGE
 * [11notes/node:stable](https://hub.docker.com/r/11notes/node)

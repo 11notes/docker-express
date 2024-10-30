@@ -1,10 +1,19 @@
 # :: QEMU
   FROM multiarch/qemu-user-static:x86_64-aarch64 as qemu
 
+# :: Util
+  FROM alpine as util
+
+  RUN set -ex; \
+    apk add --no-cache \
+      git; \
+    git clone https://github.com/11notes/util.git;
+
 # :: Header
-	FROM --platform=linux/arm64 11notes/node:arm64v8-stable
+	FROM --platform=linux/arm64 11notes/node:stable
   COPY --from=qemu /usr/bin/qemu-aarch64-static /usr/bin
-  ENV APP_VERSION=4.19.2
+  COPY --from=util /util/docker /usr/local/bin
+  ENV APP_VERSION=4.21.1
   ENV APP_NAME="express"
   ENV APP_ROOT=/node
 
@@ -13,7 +22,7 @@
 
   # :: prepare image
   RUN set -ex; \
-    apk add --no-cache \
+    apk add --no-cache --update \
       openssl; \
     mkdir -p /etc/express/ssl; \
     cd /tmp; \
@@ -43,6 +52,9 @@
 
 # :: Volumes
   VOLUME ["${APP_ROOT}"]
+
+# :: Monitor
+  HEALTHCHECK --interval=5s --timeout=2s CMD /usr/local/bin/healthcheck.sh || exit 1
 
 # :: Start
 	USER docker

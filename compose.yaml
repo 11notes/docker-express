@@ -1,6 +1,6 @@
 services:
   express:
-    image: "11notes/express:4.19.2"
+    image: "11notes/express:4.21.1"
     container_name: "express"
     environment:
       TZ: Europe/Zurich

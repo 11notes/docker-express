@@ -1,6 +1,15 @@
+# :: Util
+  FROM alpine as util
+
+  RUN set -ex; \
+    apk add --no-cache \
+      git; \
+    git clone https://github.com/11notes/util.git;
+
 # :: Header
 	FROM 11notes/node:stable
-  ENV APP_VERSION=4.19.2
+  COPY --from=util /util/docker /usr/local/bin
+  ENV APP_VERSION=4.21.1
   ENV APP_NAME="express"
   ENV APP_ROOT=/node
 
@@ -9,7 +18,7 @@
 
   # :: prepare image
   RUN set -ex; \
-    apk add --no-cache \
+    apk add --no-cache --update \
       openssl; \
     mkdir -p /etc/express/ssl; \
     cd /tmp; \
@@ -39,6 +48,9 @@
 
 # :: Volumes
   VOLUME ["${APP_ROOT}"]
+
+# :: Monitor
+  HEALTHCHECK --interval=5s --timeout=2s CMD /usr/local/bin/healthcheck.sh || exit 1
 
 # :: Start
 	USER docker
