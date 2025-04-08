@@ -1,13 +1,9 @@
+name: "express"
 services:
   express:
-    image: "11notes/express:4.21.1"
-    container_name: "express"
+    image: "11notes/express:5.1.0"
     environment:
-      TZ: Europe/Zurich
-    volumes:
-      - "express:/node"
+      TZ: "Europe/Zurich"
     ports:
-      - "8443:8443/tcp"
-    restart: always
-volumes:
-  express:
+      - "8080:8080/tcp"
+    restart: "always"

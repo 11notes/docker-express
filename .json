@@ -1,0 +1,27 @@
+{
+  "image":"11notes/express",
+  "name":"express",
+  "root":"/express",
+  
+  "semver":{
+    "version":"5.1.0",
+    "stable":"5.1.0",
+    "latest":"5.1.0"
+  },
+
+  "readme":{
+    "description":"Run your Express application rootless and distroless",
+    "parent":{
+      "image":"scratch"
+    },
+    "built":{
+      "express":"https://www.npmjs.com/package/express"
+    },
+    "distroless":{
+      "layers":[
+        "11notes/distroless",
+        "11notes/distroless:curl"
+      ]
+    }
+  }
+}
