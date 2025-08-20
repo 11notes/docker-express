@@ -20,14 +20,14 @@
 
   RUN set -ex; \
     apk --update --no-cache add \
-      npm;
+      pnpm;
 
   RUN set -ex; \
     mkdir -p /distroless${APP_ROOT}/var;
 
   RUN set -ex; \
     cd /tmp; \
-    npm install --save \
+    pnpm install \
       express@${APP_VERSION} \
       body-parser \
       nocache; \
