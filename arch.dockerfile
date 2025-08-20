@@ -1,15 +1,29 @@
-# :: Build / express
+# ╔═════════════════════════════════════════════════════╗
+# ║                       SETUP                         ║
+# ╚═════════════════════════════════════════════════════╝
+  # GLOBAL
+  ARG APP_UID=1000 \
+      APP_GID=1000
+
+# :: FOREIGN IMAGES
+  FROM 11notes/distroless AS distroless
+  FROM 11notes/distroless:localhealth AS distroless-localhealth
+  FROM 11notes/distroless:node-stable AS distroless-node
+
+# ╔═════════════════════════════════════════════════════╗
+# ║                       BUILD                         ║
+# ╚═════════════════════════════════════════════════════╝
+# :: EXPRESS
   FROM alpine AS build
-  ARG APP_VERSION
-  ARG APP_ROOT
-  USER root
+  ARG APP_VERSION \
+      APP_ROOT
 
   RUN set -ex; \
     apk --update --no-cache add \
-      npm; \
-    mkdir -p /distroless${APP_ROOT}/var;
+      npm;
 
-  COPY ./rootfs /distroless
+  RUN set -ex; \
+    mkdir -p /distroless${APP_ROOT}/var;
 
   RUN set -ex; \
     cd /tmp; \
@@ -19,49 +33,47 @@
       nocache; \
     mv ./node_modules /distroless;
 
-# :: Distroless / express
-  FROM scratch AS distroless-express
-  ARG APP_ROOT
-  COPY --from=build /distroless/ /
 
-# :: Distroless / node
-  FROM 11notes/node:stable AS distroless-node
-  FROM scratch
-  COPY --from=node /usr/local/bin/node /usr/local/bin/node
-
-# :: Header
-  FROM 11notes/distroless AS distroless
-  FROM 11notes/distroless:curl AS distroless-curl
+# ╔═════════════════════════════════════════════════════╗
+# ║                       IMAGE                         ║
+# ╚═════════════════════════════════════════════════════╝
+  # :: HEADER
   FROM scratch
 
-  # :: arguments
-    ARG TARGETARCH
-    ARG APP_IMAGE
-    ARG APP_NAME
-    ARG APP_VERSION
-    ARG APP_ROOT
-    ARG APP_UID
-    ARG APP_GID
+  # :: default arguments
+    ARG TARGETPLATFORM \
+        TARGETOS \
+        TARGETARCH \
+        TARGETVARIANT \
+        APP_IMAGE \
+        APP_NAME \
+        APP_VERSION \
+        APP_ROOT \
+        APP_UID \
+        APP_GID \
+        APP_NO_CACHE
 
-  # :: environment
-    ENV APP_IMAGE=${APP_IMAGE}
-    ENV APP_NAME=${APP_NAME}
-    ENV APP_VERSION=${APP_VERSION}
-    ENV APP_ROOT=${APP_ROOT}
+  # :: default environment
+    ENV APP_IMAGE=${APP_IMAGE} \
+        APP_NAME=${APP_NAME} \
+        APP_VERSION=${APP_VERSION} \
+        APP_ROOT=${APP_ROOT}
 
   # :: multi-stage
-    COPY --from=distroless --chown=${APP_UID}:${APP_GID} / /
-    COPY --from=distroless-node --chown=${APP_UID}:${APP_GID} / /
-    COPY --from=distroless-curl --chown=${APP_UID}:${APP_GID} / /
-    COPY --from=distroless-express --chown=${APP_UID}:${APP_GID} / /
+    COPY --from=distroless / /
+    COPY --from=distroless-localhealth / /
+    COPY --from=distroless-node / /
+    COPY --from=build /distroless/ /
+    COPY ./rootfs --chown=${APP_UID}:${APP_GID} / /
 
-# :: Volumes
+# :: PERSISTENT DATA
   VOLUME ["${APP_ROOT}/var"]
 
-# :: Monitor
-  HEALTHCHECK --interval=5s --timeout=2s CMD ["/usr/local/bin/curl", "-kILs", "--fail", "http://192.168.18.200:8080/ping"]
+# :: MONITOR
+  HEALTHCHECK --interval=5s --timeout=2s --start-period=5s \
+    CMD ["/usr/local/bin/localhealth", "http://127.0.0.1:3000/ping", "-I"]
 
-# :: Start
-  USER docker
+# :: EXECUTE
+  USER ${APP_UID}:${APP_GID}
   ENTRYPOINT ["/usr/local/bin/node"]
   CMD ["/express/var/main.js"]
