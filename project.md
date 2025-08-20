@@ -17,9 +17,9 @@ app.start();
 ${{ content_compose }}
 
 ${{ content_defaults }}
-| `port` | 8080 | /Express.js default port |
 
 ${{ content_environment }}
+| `EXPRESS_PORT` | port of Express | 3000 |
 | `EXPRESS_MAX_BODY_SIZE` | /Express.js max body size allowed | 16MB |
 
 ${{ content_source }}
