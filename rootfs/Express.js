@@ -28,7 +28,7 @@ class Express{
       console.error('exception on express HTTPS server', e);
     });
 
-    this.#server.listen(8080);
+    this.#server.listen(process.env?.EXPRESS_PORT || 3000);
     
     process.once('SIGTERM', (code) =>{
       this.#server.close();
