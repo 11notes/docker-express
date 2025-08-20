@@ -64,7 +64,7 @@
     COPY --from=distroless-localhealth / /
     COPY --from=distroless-node / /
     COPY --from=build /distroless/ /
-    COPY ./rootfs --chown=${APP_UID}:${APP_GID} / /
+    COPY --chown=${APP_UID}:${APP_GID} ./rootfs /
 
 # :: PERSISTENT DATA
   VOLUME ["${APP_ROOT}/var"]
