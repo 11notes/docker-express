@@ -1,23 +1,9 @@
 ![banner](https://github.com/11notes/defaults/blob/main/static/img/banner.png?raw=true)
 
 # EXPRESS
-[<img src="https://img.shields.io/badge/github-source-blue?logo=github&color=040308">](https://github.com/11notes/docker-EXPRESS)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![size](https://img.shields.io/docker/image-size/11notes/express/5.1.0?color=0eb305)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![version](https://img.shields.io/docker/v/11notes/express/5.1.0?color=eb7a09)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![pulls](https://img.shields.io/docker/pulls/11notes/express?color=2b75d6)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)[<img src="https://img.shields.io/github/issues/11notes/docker-EXPRESS?color=7842f5">](https://github.com/11notes/docker-EXPRESS/issues)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![swiss_made](https://img.shields.io/badge/Swiss_Made-FFFFFF?labelColor=FF0000&logo=data:image/svg%2bxml;base64,PHN2ZyB2ZXJzaW9uPSIxIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0wIDBoMzJ2MzJoLTMyeiIgZmlsbD0iI2YwMCIvPjxwYXRoIGQ9Im0xMyA2aDZ2N2g3djZoLTd2N2gtNnYtN2gtN3YtNmg3eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==)
+![size](https://img.shields.io/docker/image-size/11notes/express/5.1.0?color=0eb305)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![version](https://img.shields.io/docker/v/11notes/express/5.1.0?color=eb7a09)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![pulls](https://img.shields.io/docker/pulls/11notes/express?color=2b75d6)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)[<img src="https://img.shields.io/github/issues/11notes/docker-EXPRESS?color=7842f5">](https://github.com/11notes/docker-EXPRESS/issues)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![swiss_made](https://img.shields.io/badge/Swiss_Made-FFFFFF?labelColor=FF0000&logo=data:image/svg%2bxml;base64,PHN2ZyB2ZXJzaW9uPSIxIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxyZWN0IHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0idHJhbnNwYXJlbnQiLz4KICA8cGF0aCBkPSJtMTMgNmg2djdoN3Y2aC03djdoLTZ2LTdoLTd2LTZoN3oiIGZpbGw9IiNmZmYiLz4KPC9zdmc+)
 
 Run your Express application rootless and distroless
-
-# MAIN TAGS 🏷️
-These are the main tags for the image. There is also a tag for each commit and its shorthand sha256 value.
-
-* [5.1.0](https://hub.docker.com/r/11notes/express/tags?name=5.1.0)
-* [stable](https://hub.docker.com/r/11notes/express/tags?name=stable)
-* [latest](https://hub.docker.com/r/11notes/express/tags?name=latest)
-
-# REPOSITORIES ☁️
-```
-docker pull 11notes/express:5.1.0
-docker pull ghcr.io/11notes/express:5.1.0
-docker pull quay.io/11notes/express:5.1.0
-```
 
 # SYNOPSIS 📖
 **What can I do with this?** This image will run your Express application distroless and rootless with a default Express class provided at ```/Express.js```.
@@ -45,7 +31,7 @@ services:
     environment:
       TZ: "Europe/Zurich"
     ports:
-      - "8080:8080/tcp"
+      - "3000:3000/tcp"
     restart: "always"
 ```
 
@@ -56,14 +42,32 @@ services:
 | `uid` | 1000 | [user identifier](https://en.wikipedia.org/wiki/User_identifier) |
 | `gid` | 1000 | [group identifier](https://en.wikipedia.org/wiki/Group_identifier) |
 | `home` | /express | home directory of user docker |
-| `port` | 8080 | /Express.js default port |
 
 # ENVIRONMENT 📝
 | Parameter | Value | Default |
 | --- | --- | --- |
 | `TZ` | [Time Zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | |
 | `DEBUG` | Will activate debug option for container image and app (if available) | |
+| `EXPRESS_PORT` | port of Express | 3000 |
 | `EXPRESS_MAX_BODY_SIZE` | /Express.js max body size allowed | 16MB |
+
+# MAIN TAGS 🏷️
+These are the main tags for the image. There is also a tag for each commit and its shorthand sha256 value.
+
+* [5.1.0](https://hub.docker.com/r/11notes/express/tags?name=5.1.0)
+* [stable](https://hub.docker.com/r/11notes/express/tags?name=stable)
+
+### There is no latest tag, what am I supposed to do about updates?
+It is of my opinion that the ```:latest``` tag is dangerous. Many times, I’ve introduced **breaking** changes to my images. This would have messed up everything for some people. If you don’t want to change the tag to the latest [semver](https://semver.org/), simply use the short versions of [semver](https://semver.org/). Instead of using ```:5.1.0``` you can use ```:5``` or ```:5.1```. Since on each new version these tags are updated to the latest version of the software, using them is identical to using ```:latest``` but at least fixed to a major or minor version.
+
+If you still insist on having the bleeding edge release of this app, simply use the ```:rolling``` tag, but be warned! You will get the latest version of the app instantly, regardless of breaking changes or security issues or what so ever. You do this at your own risk!
+
+# REGISTRIES ☁️
+```
+docker pull 11notes/express:5.1.0
+docker pull ghcr.io/11notes/express:5.1.0
+docker pull quay.io/11notes/express:5.1.0
+```
 
 # SOURCE 💾
 * [11notes/express](https://github.com/11notes/docker-EXPRESS)
@@ -73,7 +77,8 @@ services:
 >This image is not based on another image but uses [scratch](https://hub.docker.com/_/scratch) as the starting layer.
 >The image consists of the following distroless layers that were added:
 >* [11notes/distroless](https://github.com/11notes/docker-distroless/blob/master/arch.dockerfile) - contains users, timezones and Root CA certificates
->* [11notes/distroless:curl](https://github.com/11notes/docker-distroless/blob/master/curl.dockerfile) - app to execute HTTP or UNIX requests
+>* [11notes/distroless:localhealth](https://github.com/11notes/docker-distroless/blob/master/localhealth.dockerfile) - app to execute HTTP requests only on 127.0.0.1
+>* [11notes/distroless:node](https://github.com/11notes/docker-distroless/blob/master/node.dockerfile) - node (stable version)
 
 # BUILT WITH 🧰
 * [express](https://www.npmjs.com/package/express)
@@ -86,4 +91,4 @@ services:
 # ElevenNotes™️
 This image is provided to you at your own risk. Always make backups before updating an image to a different version. Check the [releases](https://github.com/11notes/docker-express/releases) for breaking changes. If you have any problems with using this image simply raise an [issue](https://github.com/11notes/docker-express/issues), thanks. If you have a question or inputs please create a new [discussion](https://github.com/11notes/docker-express/discussions) instead of an issue. You can find all my other repositories on [github](https://github.com/11notes?tab=repositories).
 
-*created 09.04.2025, 09:02:56 (CET)*
+*created 20.08.2025, 09:27:18 (CET)*
