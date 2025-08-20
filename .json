@@ -4,8 +4,7 @@
   "root":"/express",
   
   "semver":{
-    "version":"5.1.0",
-    "stable":"5.1.0"
+    "version":"5.1.0"
   },
 
   "readme":{
@@ -22,6 +21,9 @@
         "11notes/distroless:localhealth",
         "11notes/distroless:node"
       ]
+    },
+    "comparison": {
+      "image": "bitnami/express:5.1.0"
     }
   }
 }
