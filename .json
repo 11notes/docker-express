@@ -5,8 +5,7 @@
   
   "semver":{
     "version":"5.1.0",
-    "stable":"5.1.0",
-    "latest":"5.1.0"
+    "stable":"5.1.0"
   },
 
   "readme":{
@@ -20,7 +19,8 @@
     "distroless":{
       "layers":[
         "11notes/distroless",
-        "11notes/distroless:curl"
+        "11notes/distroless:localhealth",
+        "11notes/distroless:node"
       ]
     }
   }
