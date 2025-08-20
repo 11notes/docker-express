@@ -8,6 +8,29 @@ Run your Express application rootless and distroless
 # SYNOPSIS 📖
 **What can I do with this?** This image will run your Express application distroless and rootless with a default Express class provided at ```/Express.js```.
 
+# UNIQUE VALUE PROPOSITION 💶
+**Why should I run this image and not the other image(s) that already exist?** Good question! Because ...
+
+> [!IMPORTANT]
+>* ... this image runs [rootless](https://github.com/11notes/RTFM/blob/main/linux/container/image/rootless.md) as 1000:1000
+>* ... this image has no shell since it is [distroless](https://github.com/11notes/RTFM/blob/main/linux/container/image/distroless.md)
+>* ... this image is auto updated to the latest version via CI/CD
+>* ... this image has a health check
+>* ... this image runs read-only
+>* ... this image is automatically scanned for CVEs before and after publishing
+>* ... this image is created via a secure and pinned CI/CD process
+>* ... this image is very small
+
+If you value security, simplicity and optimizations to the extreme, then this image might be for you.
+
+# COMPARISON 🏁
+Below you find a comparison between this image and the most used or original one.
+
+| **image** | **size on disk** | **init default as** | **[distroless](https://github.com/11notes/RTFM/blob/main/linux/container/image/distroless.md)** | supported architectures
+| ---: | ---: | :---: | :---: | :---: |
+| 11notes/express:5.1.0 | 30MB | 1000:1000 | ✅ | arm64, armv7, amd64 |
+| bitnami/express:5.1.0 | 676MB | 0:0 | ❌ | amd64, arm64 |
+
 # VOLUMES 📁
 * **/express/var** - Directory of the express application
 
@@ -90,4 +113,4 @@ docker pull quay.io/11notes/express:5.1.0
 # ElevenNotes™️
 This image is provided to you at your own risk. Always make backups before updating an image to a different version. Check the [releases](https://github.com/11notes/docker-express/releases) for breaking changes. If you have any problems with using this image simply raise an [issue](https://github.com/11notes/docker-express/issues), thanks. If you have a question or inputs please create a new [discussion](https://github.com/11notes/docker-express/discussions) instead of an issue. You can find all my other repositories on [github](https://github.com/11notes?tab=repositories).
 
-*created 20.08.2025, 09:59:45 (CET)*
+*created 20.08.2025, 10:04:30 (CET)*
